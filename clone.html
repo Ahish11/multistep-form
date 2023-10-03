@@ -569,42 +569,18 @@
 
     console.log("userQualForm.length", userQualForm.length);
     console.log("userQualForm", userQualForm);
-
-    // let a = 0
-    // const backBtn = document.querySelectorAll(".back")
-    // backBtn.forEach(backBtns => {
-    //   backBtns.addEventListener("click", () => {
-    //     userQualForm[a].classList.remove("show");
-    //     if (a > 0) {
-    //       // a += 1;
-    //       // a = a - 1
-    //       a = a - 1;
-    //       console.log("a", a);
-    //     }
-    //     userQualForm[a].classList.add("show");
-    //   })
-    // })
-
-    // gpt
+    // back option
     const backBtn = document.querySelectorAll(".back");
     backBtn.forEach((button) => {
       button.addEventListener("click", () => {
-        // Remove the "show" class from the current slide
         userQualForm[i].classList.remove("show");
-
-        // Decrement the current slide index (move to the previous slide) unless it's already at the first slide
         if (i > 0) {
           i--;
           console.log(i);
         }
-
-        // Add the "show" class to the previous slide
         userQualForm[i].classList.add("show");
       });
     });
-
-
-
 
     // otherInput.addEventListener("onkeyup",checkValueisPresent())
     // otherInput.value !== "" ? otherInput.style.border = "1px solid pink" : otherInput.style.border = "1px solid red"
