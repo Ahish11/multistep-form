@@ -42,8 +42,6 @@
       box-shadow: 0 0 6px 0 #cbcbcb;
       margin: auto;
       background-color: white;
-      width: 552px;
-      max-width: 100%;
       border-radius: 30px;
     }
 
@@ -56,7 +54,7 @@
       font-weight: 700;
       color: black;
       font-family: 'PT Sans', sans-serif;
-      margin: 16px 0 24px 0;
+      margin: 0 0 24px 0;
       text-align: center;
     }
 
@@ -74,6 +72,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 11px 16px;
+    }
+
+    .popup-userQual {
+      width: 38%;
     }
 
     .fieldItems-inner label {
@@ -129,9 +131,11 @@
     }
 
     .inputContainer {
-      margin: auto;
-      width: 18%;
+      display: flex;
       margin-top: 16px;
+      align-items: center;
+      justify-content: center;
+      column-gap: 5px;
     }
 
     .inputContainer {
@@ -154,6 +158,13 @@
 
     .back {
       cursor: pointer;
+      position: absolute;
+      top: 40px;
+      left: 20px;
+    }
+
+    .userQual-form {
+      position: relative;
     }
 
     /* script */
@@ -165,12 +176,22 @@
       display: none;
     }
 
+    .userQual-form::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .userQual-form {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     @media (max-height: 800px) {
       .userQual-form-vh {
-        overflow-y: scroll;
         height: calc(100vh - 100px);
       }
     }
+
 
     .userQual-form {
       display: none;
@@ -186,6 +207,55 @@
       font-size: 15px;
       display: none;
     }
+
+    @media (max-width: 992px) {
+      .popup-userQual {
+        width: 58%;
+      }
+          
+    @media (max-height: 800px) {
+      .userQual-form-vh-small {
+        height: calc(100vh - 100px);
+      }
+    }
+    }
+
+    @media (max-width: 576px) {
+      .popup-userQual {
+        width: 80%;
+      }
+
+      @media (max-height: 800px) {
+        .userQual-form-vh {
+          overflow-y: auto;
+          height: calc(100vh - 100px);
+        }
+      }
+
+      .fieldItems-inner label {
+        font-size: 13px;
+      }
+
+      .fieldItems-inner {
+        padding: 8px 11px;
+      }
+
+      .pleaseSelect {
+        font-size: 12px;
+      }
+
+      .userQual-h {
+        font-size: 20px;
+      }
+
+      .textArea-box input {
+        width: 93%;
+      }
+
+      .userQual-form {
+        padding: 19px 20px 19px 20px;
+      }
+    }
   </style>
 </head>
 
@@ -196,10 +266,6 @@
         <form class="userQual-form userQual-form-vh">
           <div class="form-container">
             <div class="topbar-userQual-form">
-              <div class="back">Back</div>
-              <div>
-                <img class="userQual-stevelogo" src="{% static 'icons/newUserOnboard/steveLogoo.png' %}" alt="logo">
-              </div>
               <p class="userQual-h">What Kind of videos do you create?</p>
             </div>
             <div class="field-items">
@@ -259,12 +325,11 @@
         </form>
       </div>
       <div class="userQual-inner">
-        <form class="userQual-form">
+        <form class="userQual-form userQual-form-vh-small">
           <div class="form-container">
             <div class="topbar-userQual-form">
-              <div class="back">Back</div>
-              <div>
-                <img class="userQual-stevelogo" src="{% static 'icons/newUserOnboard/steveLogoo.png' %}" alt="logo">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
               </div>
               <p class="userQual-h">What is your goal?</p>
             </div>
@@ -314,12 +379,11 @@
         </form>
       </div>
       <div class="userQual-inner">
-        <form class="userQual-form">
+        <form class="userQual-form userQual-form-vh">
           <div class="form-container">
             <div class="topbar-userQual-form">
-              <div class="back">Back</div>
-              <div>
-                <img class="userQual-stevelogo" src="{% static 'icons/newUserOnboard/steveLogoo.png' %}" alt="logo">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
               </div>
               <p class="userQual-h">How big is your Organization?</p>
             </div>
@@ -374,9 +438,8 @@
         <form class="userQual-form userQual-form-vh">
           <div class="form-container">
             <div class="topbar-userQual-form">
-              <div class="back">Back</div>
-              <div>
-                <img class="userQual-stevelogo" src="{% static 'icons/newUserOnboard/steveLogoo.png' %}" alt="logo">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
               </div>
               <p class="userQual-h">How would you describe your role?</p>
             </div>
@@ -446,9 +509,8 @@
         <form class="userQual-form userQual-form-last userQual-form-vh">
           <div class="form-container">
             <div class="topbar-userQual-form">
-              <div class="back">Back</div>
-              <div>
-                <img class="userQual-stevelogo" src="{% static 'icons/newUserOnboard/steveLogoo.png' %}" alt="logo">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
               </div>
               <p class="userQual-h">Where do you publish/distribute your videos?</p>
             </div>
@@ -507,8 +569,8 @@
     </div>
   </section>
   <script>
-    var csrftoken = '{{request.COOKIES.csrftoken}}'
-    var siteurl = '{{CURRENT_SITE_URL}}'
+    // var csrftoken = '{{request.COOKIES.csrftoken}}'
+    // var siteurl = '{{CURRENT_SITE_URL}}'
     let i = 0;
     const userQualForm = document.querySelectorAll(".userQual-form");
     const formList = [];
@@ -589,16 +651,11 @@
     const backBtn = document.querySelectorAll(".back");
     backBtn.forEach((button) => {
       button.addEventListener("click", () => {
-        // Remove the "show" class from the current slide
         userQualForm[i].classList.remove("show");
-
-        // Decrement the current slide index (move to the previous slide) unless it's already at the first slide
         if (i > 0) {
           i--;
           console.log(i);
         }
-
-        // Add the "show" class to the previous slide
         userQualForm[i].classList.add("show");
       });
     });
@@ -662,13 +719,6 @@
 
     function checkValueisPresent() {
       var otherInput = userQualForm[i].querySelector(".other-Input-item");
-      // if(otherInput.value.trim() !== "") {
-      //   otherInput.style.border = "1px solid #57BEFF"
-      //   // console.log("inside other input");
-      // }else{
-      //   otherInput.style.border = "1px solid red"
-      // }
-      // 
       otherInput.value.trim() !== "" ?
         otherInput.style.border = "1px solid #57BEFF" : otherInput.style.border = "1px solid red"
     }
@@ -700,22 +750,22 @@
         }
         else {
           console.log('in ajax');
-          $.ajax({
-            type: "POST",
-            // url: siteurl + "/api/v1/user/collection/",
-            data: { video_categories: video_categories, video_goal: video_goal, organisation_size: organisation_size, user_role: user_role, video_publish_in: video_publish_in },
-            headers: { 'Access-Control-Allow-Origin': '*', "X-CSRFToken": csrftoken },
-            success: function (result) {
-              let isSuccess = result.success
-              if (isSuccess) {
-                window.location.href = `${siteurl}/dashboard`;
-                console.log("redirected");
-              }
-            },
-            error: function (xhr, status, error) {
-              console.error("POST request failed:", error);
-            }
-          });
+          // $.ajax({
+          //   type: "POST",
+          //   // url: siteurl + "/api/v1/user/collection/",
+          //   data: { video_categories: video_categories, video_goal: video_goal, organisation_size: organisation_size, user_role: user_role, video_publish_in: video_publish_in },
+          //   headers: { 'Access-Control-Allow-Origin': '*', "X-CSRFToken": csrftoken },
+          //   success: function (result) {
+          //     let isSuccess = result.success
+          //     if (isSuccess) {
+          //       window.location.href = `${siteurl}/dashboard`;
+          //       console.log("redirected");
+          //     }
+          //   },
+          //   error: function (xhr, status, error) {
+          //     console.error("POST request failed:", error);
+          //   }
+          // });
         }
       }
     })
