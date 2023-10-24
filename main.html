@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboard</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'icons/favicon.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      font-family: 'PT Sans', sans-serif;
+    }
+
+    .userQual-banner-sec {
+      background-image: url("./images/bannerUserqual.png");
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .userQual-form {
+      background-color: white;
+      padding: 36px 44px 34px 44px;
+      border-radius: 30px;
+      overflow-y: scroll;
+    }
+
+    .defaultCheckbox [type=checkbox] {
+      border-radius: 50%;
+    }
+
+    .userQual-inner {
+      -webkit-box-shadow: 0 0 6px 0 #cbcbcb;
+      box-shadow: 0 0 6px 0 #cbcbcb;
+      margin: auto;
+      background-color: white;
+      border-radius: 30px;
+    }
+
+    .userQual-stevelogo {
+      height: 40px;
+    }
+
+    .userQual-h {
+      font-size: 24px;
+      font-weight: 700;
+      color: black;
+      font-family: 'PT Sans', sans-serif;
+      margin: 0 0 24px 0;
+      text-align: center;
+    }
+
+    .topbar-userQual-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fieldItems-inner {
+      border: 1px solid #E8E8E8;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+    }
+
+    .popup-userQual {
+      width: 38%;
+    }
+
+    .fieldItems-inner label {
+      font-size: 16px;
+    }
+
+    .next-outer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .unChecked--box {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      border: 1px solid #A7A7A7;
+    }
+
+    .checked--box {
+      background: url("./images/checked-icon.png") no-repeat;
+      background-size: cover;
+      width: 19px;
+      height: 19px;
+    }
+
+    .next-outer-btn,
+    .unChecked--box,
+    .checked--box,
+    .fieldItems-inner,
+    .submit-btn {
+      cursor: pointer;
+    }
+
+    .next-outer-btn,
+    .submit-btn {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid beige;
+      background-color: #57BEFF;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      height: 44px;
+      margin: 8px 0 16px 0;
+    }
+
+    .textArea-box input::placeholder {
+      color: #D8D8D8;
+      margin-top: -10px;
+      display: flex;
+      align-items: start;
+    }
+
+    .inputContainer {
+      display: flex;
+      margin-top: 16px;
+      align-items: center;
+      justify-content: center;
+      column-gap: 5px;
+    }
+
+    .inputContainer {
+      accent-color: #8138F5;
+    }
+
+    .textArea-box input {
+      /* padding: 23px 10px; */
+      padding: 0 10px;
+      height: 66px;
+      color: #1a1a1a;
+      font-size: 14px;
+      border-radius: 10px;
+      max-height: 66px;
+      overflow-y: scroll;
+      width: 95%;
+      border: 1px solid #57BEFF;
+      outline: 0;
+    }
+
+    .back {
+      cursor: pointer;
+      position: absolute;
+      top: 40px;
+      left: 20px;
+    }
+
+    .userQual-form {
+      position: relative;
+    }
+
+    /* script */
+    .active-other-fieldItems {
+      border: 1px solid #57BEFF;
+    }
+
+    .textArea-box {
+      display: none;
+    }
+
+    .userQual-form::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .userQual-form {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @media (max-height: 800px) {
+      .userQual-form-vh {
+        height: calc(100vh - 100px);
+      }
+    }
+
+
+    .userQual-form {
+      display: none;
+    }
+
+    .userQual-form.show {
+      display: block;
+    }
+
+    .pleaseSelect {
+      text-align: center;
+      color: #ff3f3f;
+      font-size: 15px;
+      display: none;
+    }
+
+    @media (max-width: 992px) {
+      .popup-userQual {
+        width: 58%;
+      }
+          
+    @media (max-height: 800px) {
+      .userQual-form-vh-small {
+        height: calc(100vh - 100px);
+      }
+    }
+    }
+
+    @media (max-width: 576px) {
+      .popup-userQual {
+        width: 80%;
+      }
+
+      @media (max-height: 800px) {
+        .userQual-form-vh {
+          overflow-y: auto;
+          height: calc(100vh - 100px);
+        }
+      }
+
+      .fieldItems-inner label {
+        font-size: 13px;
+      }
+
+      .fieldItems-inner {
+        padding: 8px 11px;
+      }
+
+      .pleaseSelect {
+        font-size: 12px;
+      }
+
+      .userQual-h {
+        font-size: 20px;
+      }
+
+      .textArea-box input {
+        width: 93%;
+      }
+
+      .userQual-form {
+        padding: 19px 20px 19px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="userQual-banner-sec">
+    <div class="popup-userQual">
+      <div class="userQual-inner">
+        <form class="userQual-form userQual-form-vh">
+          <div class="form-container">
+            <div class="topbar-userQual-form">
+              <p class="userQual-h">What Kind of videos do you create?</p>
+            </div>
+            <div class="field-items">
+              <div class="fieldItems-inner">
+                <label for="create1" class="Explainer">Explainer</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="create2">Courses</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Educational</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Internal Communication</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Promotional</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Social Media</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">How to’s & Tips Videos</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div>
+                <div class="other--fieldItems fieldItems-inner">
+                  <label for="">Other (Specify)</label>
+                  <div class="unChecked--box activeOthers"></div>
+                </div>
+                <div class="textArea-box textArea-box3">
+                  <input class="other-Input-item" type="text" onkeyup="checkValueisPresent()"
+                    placeholder="Type your text…">
+                </div>
+              </div>
+              <div class="pleaseSelect">
+                Please select at least one Item
+              </div>
+            </div>
+          </div>
+          <div class="next-outer">
+            <input class="next-outer-btn" type="submit" value="Next">
+          </div>
+          <div class="inputContainer">
+            <input type="radio" checked>
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+          </div>
+        </form>
+      </div>
+      <div class="userQual-inner">
+        <form class="userQual-form userQual-form-vh-small">
+          <div class="form-container">
+            <div class="topbar-userQual-form">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
+              </div>
+              <p class="userQual-h">What is your goal?</p>
+            </div>
+            <div class="field-items">
+              <div class="fieldItems-inner">
+                <label for="create1" class="Explainer">Create for your Business</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="create2">Resell as part of the Agency
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Monetize your YouTube or Social channels</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Personal use</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div>
+                <div class="other--fieldItems fieldItems-inner">
+                  <label for="">Other (Specify)</label>
+                  <div class="unChecked--box activeOthers"></div>
+                </div>
+                <div class="textArea-box textArea-box3">
+                  <input class="other-Input-item" type="text" onkeyup="checkValueisPresent()"
+                    placeholder="Type your text…">
+                </div>
+              </div>
+              <div class="pleaseSelect">
+                Please select at least one Item
+              </div>
+            </div>
+          </div>
+          <div class="next-outer">
+            <input class="next-outer-btn" type="submit" value="Next">
+          </div>
+          <div class="inputContainer">
+            <input type="radio">
+            <input type="radio" checked>
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+          </div>
+        </form>
+      </div>
+      <div class="userQual-inner">
+        <form class="userQual-form userQual-form-vh">
+          <div class="form-container">
+            <div class="topbar-userQual-form">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
+              </div>
+              <p class="userQual-h">How big is your Organization?</p>
+            </div>
+            <div class="field-items">
+              <div class="fieldItems-inner">
+                <label for="create1" class="Explainer">Solo</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="create2">2-10 employees
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">11-100 employees
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">101-500 employees
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">501-1000 employees
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">More than 1000 employees
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="pleaseSelect">
+                Please select at least one Item
+              </div>
+            </div>
+          </div>
+          <div class="next-outer">
+            <input class="next-outer-btn" type="submit" value="Next">
+          </div>
+          <div class="inputContainer">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio" checked>
+            <input type="radio">
+            <input type="radio">
+          </div>
+        </form>
+      </div>
+      <div class="userQual-inner">
+        <form class="userQual-form userQual-form-vh">
+          <div class="form-container">
+            <div class="topbar-userQual-form">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
+              </div>
+              <p class="userQual-h">How would you describe your role?</p>
+            </div>
+            <div class="field-items">
+              <div class="fieldItems-inner">
+                <label for="create1" class="Explainer">Marketer</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="create2">Content Creator
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Educator & Course Creator
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">YouTuber
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Social Media Influencer
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Sales Professional
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">HR & Internal Communications
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div>
+                <div class="other--fieldItems fieldItems-inner">
+                  <label for="">Other (Specify)</label>
+                  <div class="unChecked--box activeOthers"></div>
+                </div>
+                <div class="textArea-box textArea-box3">
+                  <input class="other-Input-item" type="text" onkeyup="checkValueisPresent()"
+                    placeholder="Type your text…">
+                </div>
+              </div>
+              <div class="pleaseSelect">
+                Please select at least one Item
+              </div>
+            </div>
+          </div>
+          <div class="next-outer">
+            <input class="next-outer-btn" type="submit" value="Next">
+          </div>
+          <div class="inputContainer">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio" checked>
+            <input type="radio">
+          </div>
+        </form>
+      </div>
+      <div class="userQual-inner">
+        <form class="userQual-form userQual-form-last userQual-form-vh">
+          <div class="form-container">
+            <div class="topbar-userQual-form">
+              <div class="back">
+                <img src="./images/left-arrow.png" alt="left">
+              </div>
+              <p class="userQual-h">Where do you publish/distribute your videos?</p>
+            </div>
+            <div class="field-items">
+              <div class="fieldItems-inner">
+                <label for="create1" class="Explainer">YouTube and other channels</label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="create2">Internal Teams
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Social Media
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">Website & Blogs
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div class="fieldItems-inner">
+                <label for="">LMS
+                </label>
+                <div class="unChecked--box"></div>
+              </div>
+              <div>
+                <div class="other--fieldItems fieldItems-inner">
+                  <label for="">Other (Specify)</label>
+                  <div class="unChecked--box activeOthers"></div>
+                </div>
+                <div class="textArea-box textArea-box3">
+                  <input class="other-Input-item other-Input-item-last" type="text" onkeyup="checkValueisPresent()"
+                    placeholder="Type your text…">
+                </div>
+              </div>
+              <div class="pleaseSelect">
+                Please select at least one Item
+              </div>
+            </div>
+          </div>
+          <div class="next-outer">
+            <input class="next-outer-btn" id="submit-values" type="submit" value="Submit">
+          </div>
+          <div class="inputContainer">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio">
+            <input type="radio" checked>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+    </script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
